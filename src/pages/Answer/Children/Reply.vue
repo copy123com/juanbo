@@ -4,11 +4,13 @@
     :header="`${data.length} replies`"
     itemLayout="horizontal"
     :dataSource="data"
+    extra="horizontal"
+    type="flex" justify="end"
   >
     <a-list-item slot="renderItem" slot-scope="item">
       <a-comment :author="item.author" :avatar="item.avatar">
         <template slot="actions">
-          <span v-for="(action,index) in item.actions" :key="index">{{ action }}</span>
+          <span v-for="(action,index) in item.actions" :key="index" @click="change">{{ action }}</span>
         </template>
         <p slot="content">{{ item.content }}</p>
         <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
@@ -25,7 +27,7 @@ export default {
     return {
       data: [
         {
-          actions: ['Reply to'],
+          actions: ['回复'],
           author: 'Han Solo',
           avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
@@ -60,5 +62,11 @@ export default {
       moment,
     };
   },
+  methods:{
+    //点击回复按钮
+    change(){
+      console.log('1');
+    }
+  }
 };
 </script>

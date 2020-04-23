@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import MintUi from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
-import { Tabs,Comment,List,Tooltip,Icon,Avatar,Menu} from 'ant-design-vue';
+import { Tabs,Comment,List,Tooltip,Icon,Avatar,Menu,Layout,Upload,Modal} from 'ant-design-vue';
 
 
 Vue.use(ElementUI);
@@ -25,6 +25,9 @@ Vue.use(Tooltip);
 Vue.use(Icon);
 Vue.use(Avatar);
 Vue.use(Menu);
+Vue.use(Layout);
+Vue.use(Upload);
+Vue.use(Modal);
 
 Vue.config.productionTip = false
 

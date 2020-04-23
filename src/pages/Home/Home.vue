@@ -3,30 +3,31 @@
    <div class="homeBox">
       <ul>
          <li>
-            <div>
+            <router-link to="/list" class="divs">
                <p>文</p>
-               <span>发布</span>
-            </div>
-             <div>
+               <span>待定</span>
+            </router-link>  
+            <router-link to="/list" class="divs">
                <p>Aa</p>
                <span>英语作文</span>
-            </div>
+            </router-link>   
+             
          </li>
          <li class="biglogo">
             <p>
                <img src="../../assets/img/photograph.jpg" alt="">
             </p>
-            <span>拍照提问</span>
+            <span>发布问题</span>
          </li>
          <li>
-            <div>
+            <router-link to="/calculator" class="divs">
                <i class="fa fa-calculator" aria-hidden="true"></i>
                <span>计算器</span>
-            </div>
-            <div>
+             </router-link>   
+            <router-link to="/list" class="divs">
                <i class="fa fa-book" aria-hidden="true"></i>
                <span>古诗文</span>
-            </div>
+             </router-link>   
          </li>
          
       </ul>
@@ -70,7 +71,7 @@ export default {
     flex-direction row
     justify-content space-between
     align-items center
-    div{
+    .divs{
       display flex
       flex 1
       flex-direction column
@@ -78,7 +79,8 @@ export default {
       align-items center
       span{
          margin-top .4rem
-         font-size 14px
+         font-size 14px;
+         color #000
        } 
        i{
          width 3.466667rem

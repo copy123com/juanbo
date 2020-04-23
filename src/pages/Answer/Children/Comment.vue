@@ -22,9 +22,9 @@
             {{ dislikes }}
           </span>
         </span>
-        <span key="comment-basic-reply-to">Reply to</span>
+        <span key="comment-basic-reply-to" @click="replys">评论</span>
       </template>
-      <a slot="author">Han Solo</a>
+      <a slot="author">{{name}}</a>
       <a-avatar
         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
         alt="Han Solo"
@@ -36,16 +36,18 @@
         efficiently.
       </p>
       <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
-        <span>{{ moment().fromNow() }}</span>
+        <span>{{ moment().startOf('hour').fromNow() }}</span>
       </a-tooltip>
     </a-comment>
     <Reply></Reply>
+    <CommentTextarea class="textareaBox" :type="ctype" :name="name" :cisShow="isShow" @submit="csubmit" @canel="ccanel"></CommentTextarea>
    </div>
 </template>
 
 <script>
 import moment from 'moment'
 import Reply from './Reply'
+import CommentTextarea from './CommentTextarea'
 export default {
   data() {
     return {
@@ -53,26 +55,49 @@ export default {
       dislikes: 0,
       action: null,
       moment,
+      name:'Han Solo',
+      isShow:false,
+      ctype:false
     };
   },
   methods: {
+    //回答的好likes加1
     like() {
       this.likes = 1;
       this.dislikes = 0;
       this.action = 'liked';
     },
+    //回答不好likes加1
     dislike() {
       this.likes = 0;
       this.dislikes = 1;
       this.action = 'disliked';
     },
+    //点击回复并让issShow为true，使子组件显示
+    replys(){
+      this.isShow = !this.isShow;
+      this.ctype = !this.ctype;
+      console.log(this.isShow+'1')
+    },
+    //子组件点击提交返回来的数据
+    csubmit(res,rep){
+      this.isShow = rep;
+      console.log('回来'+rep)
+    },
+     //子组件点击取消返回来的数据
+    ccanel(rep){
+      this.isShow = rep
+    }
   },
   components:{
-    Reply
+    Reply,
+    CommentTextarea
   }
 }
 </script>
 
 <style>
-
+.textareaBox{
+  margin-bottom: 50px;
+}
 </style>
