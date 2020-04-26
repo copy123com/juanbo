@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nav-g></nav-g>
     <CalculatorItem :input-show="inputShow" class="input-box"></CalculatorItem>
     <div id="btn-list">
       <div @click="clearValue()" class=" btn-30 btn-radius color-red clear-marginleft">C</div>
@@ -30,6 +31,7 @@
 
 <script>
 import CalculatorItem from '../../../pages/Home/Children/CalculatorItem'
+import navG from '@/components/front/navG'
 export default {
   data(){
     return{
@@ -90,7 +92,8 @@ export default {
     }
   },
   components:{
-    CalculatorItem
+    CalculatorItem,
+    navG
   }
 }
 </script>
