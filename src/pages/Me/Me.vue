@@ -3,8 +3,8 @@
    <div>
       <header class="h-box">
          <img src="./../../assets/logo.png" alt="">
-         <a href="#">
-            <span>登录/注册</span>
+         <a href="/login">
+            <span>登录</span>
          </a>
       </header>
 

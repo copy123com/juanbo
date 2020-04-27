@@ -6,10 +6,13 @@ import Answer from '@/pages/Answer/Answer'
 const Comment=()=>import('@/pages/Answer/Children/Comment')
 const List = () =>import('@/pages/List/List')
 const Calculator = ()=>import('@/pages/Home/Children/Calculator')
-
+const PutQuestionsTo = ()=>import('@/pages/PutQuestionsTo/PutQuestionsTo')
+const listDetails = ()=>import('@/pages/List/listDetails')
+const Register = ()=>import('@/pages/Register/Register')
+const Login = ()=>import('@/pages/Login/Login')
 Vue.use(Router)
 
-export default new Router({
+ const router = new Router({
     routes: [{
         path: '/',
         redirect: '/home'
@@ -40,6 +43,23 @@ export default new Router({
         path:'/calculator',
         name:'calculator',
         component:Calculator
+    },{
+        path:'/putquestionsto',
+        name:'putquestionsto',
+        component:PutQuestionsTo
+    },{
+        path:'/listdetails',
+        name:'listdetails',
+        component:listDetails
+    },{
+        path:'/register',
+        name:'register',
+        component:Register
+    },{
+        path:'/login',
+        name:'login',
+        component:Login
     }],
     mode:'history'
 })
+export default router;

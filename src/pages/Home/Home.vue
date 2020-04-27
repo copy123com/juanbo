@@ -14,10 +14,12 @@
              
          </li>
          <li class="biglogo">
-            <p>
-               <img src="../../assets/img/photograph.jpg" alt="">
-            </p>
-            <span>发布问题</span>
+            <router-link to="/putquestionsto" class="routers">
+               <p>
+                  <img src="../../assets/img/photograph.jpg" alt="">
+               </p>
+               <span>发布问题</span>
+            </router-link>
          </li>
          <li>
             <router-link to="/calculator" class="divs">
@@ -102,21 +104,29 @@ export default {
          background-color #fff
        }  
      }
-     p{
-        width 7.466667rem
-        height 7.466667rem
-        background-color #8497b0
-        border-radius 50%
-        line-height 7.466667rem
-        display flex
-        justify-content center
-        align-items center
-        border 2px solid #fff
-      }
    }
    .biglogo{
       display flex
       flex-direction column
+      .routers{
+         p{
+            width 7.466667rem
+            height 7.466667rem
+            background-color #8497b0
+            border-radius 50%
+            line-height 7.466667rem
+            display flex
+            justify-content center
+            align-items center
+            border 2px solid #fff
+           
+         }
+         span{
+            display block
+            color #000
+            text-align center
+         }
+      }
    }
 }
 

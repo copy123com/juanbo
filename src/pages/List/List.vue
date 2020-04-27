@@ -1,10 +1,10 @@
 <template>
   <div class="listBox">
      <div class="tab">
-       <h3>我的问答</h3>
+       <h3>英语作文</h3>
      </div>
-    <a-list itemLayout="horizontal" :dataSource="data" class="a-list">
-    <a-list-item slot="renderItem" slot-scope="item, index" :key="index">
+    <a-list itemLayout="horizontal" :dataSource="data" class="a-list" >
+    <a-list-item slot="renderItem" slot-scope="item, index" :key="index" @click="listClick(item.id)">
       <a-list-item-meta
         description="Ant Design, a design language for background applications, is refined by Ant UED Team"
       >
@@ -22,15 +22,19 @@
 <script>
   const data = [
   {
+    id:'1',
     title: 'Ant Design Title 1',
   },
   {
+    id:'4',
     title: 'Ant Design Title 2',
   },
   {
+    id:'3',
     title: 'Ant Design Title 3',
   },
   {
+    id:'2',
     title: 'Ant Design Title 4',
   },
 ]
@@ -40,6 +44,12 @@ export default {
       data,
     };
   },
+  methods:{
+    listClick(res){
+      this.$router.push('/listdetails')
+      console.log(res)
+    }
+  }
 }
 
 </script>

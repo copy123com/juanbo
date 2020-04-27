@@ -5,7 +5,8 @@
     itemLayout="horizontal"
     :dataSource="data"
     extra="horizontal"
-    type="flex" justify="end"
+    type="flex"
+    justify="end"
   >
     <a-list-item slot="renderItem" slot-scope="item">
       <a-comment :author="item.author" :avatar="item.avatar">
@@ -21,7 +22,7 @@
   </a-list>
 </template>
 <script>
-import moment from 'moment';
+import moment from 'moment'
 export default {
   data() {
     return {
@@ -29,44 +30,48 @@ export default {
         {
           actions: ['回复'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar:
+            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(1, 'days'),
+          datetime: moment().subtract(1, 'days')
         },
         {
           actions: ['Reply to'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar:
+            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(2, 'days'),
+          datetime: moment().subtract(2, 'days')
         },
         {
           actions: ['Reply to'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar:
+            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(2, 'days'),
+          datetime: moment().subtract(2, 'days')
         },
         {
           actions: ['Reply to'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar:
+            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(2, 'days'),
-        },
+          datetime: moment().subtract(2, 'days')
+        }
       ],
-      moment,
-    };
+      moment
+    }
   },
-  methods:{
+  methods: {
     //点击回复按钮
-    change(){
-      console.log('1');
+    change() {
+      console.log('1')
     }
   }
-};
+}
 </script>

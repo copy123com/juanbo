@@ -3,7 +3,7 @@
     <CalculatorItem :input-show="inputShow" class="input-box"></CalculatorItem>
     <div id="btn-list">
       <div @click="clearValue()" class=" btn-30 btn-radius color-red clear-marginleft">C</div>
-      <div class=" btn-30 btn-radius color-blue">+/-</div>
+      <div @click="oppositeValue()" class=" btn-30 btn-radius color-blue">+/-</div>
       <div @click="inputValue('%')" class=" btn-30 btn-radius color-blue">%</div>
       <div @click="backValue()" class=" btn-70 btn-radius color-red font-14">←</div>
       <div @click="inputValue('7')" class=" btn-30 btn-radius clear-marginleft">7</div>
@@ -85,7 +85,16 @@ export default {
       if(str.length ==1){
         this.inputShow.value = '0';
       }else{
-        this.inputShow.value = str.slice(0,str,length-1);
+        this.inputShow.value = str.slice(0,str.length-1);
+      }
+    },
+    oppositeValue(){            //正负号取值
+      var str = this.inputShow.value;
+      var num = (''+parseInt(str.split('').reverse().join(''))).split('').reverse().join('');   //获取输入框内最后遗传数字
+      var nlen = num.length;
+      
+      if(!isNaN( parseInt(str.charAt(str.length-1))) && num != 0){  //当输入框末位字符为数字且最后一串数字不为0时,取正负
+        this.inputShow.value = str.substring(0,str.length-nlen)+`-${num}`;
       }
     }
   },
