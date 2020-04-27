@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nav-g></nav-g>
     <CalculatorItem :input-show="inputShow" class="input-box"></CalculatorItem>
     <div id="btn-list">
       <div @click="clearValue()" class=" btn-30 btn-radius color-red clear-marginleft">C</div>
@@ -30,6 +31,7 @@
 
 <script>
 import CalculatorItem from '../../../pages/Home/Children/CalculatorItem'
+import navG from '@/components/front/navG'
 export default {
   data(){
     return{
@@ -99,7 +101,8 @@ export default {
     }
   },
   components:{
-    CalculatorItem
+    CalculatorItem,
+    navG
   }
 }
 </script>
@@ -116,7 +119,7 @@ a{outline-style:none;color:#535353;text-decoration:none}
 a:hover{color:#D40000;text-decoration:none}
 .clear{height:0;overflow:hidden;clear:both}
 
- .input-box{margin:0;width:100%;padding:9px 5px;height:80px;border:1px solid #e5e5e5;background:#FFF;text-align:right;line-height:80px;font-size:18px;font-family:Verdana, Geneva, sans-serif;color:#666;outline:none; text-transform:uppercase; position: fixed;bottom: 350px;left: 0;border: 5px solid rgb(235, 235, 235);}
+ .input-box{margin:0;width:100%;border:1px solid #e5e5e5;background:#FFF;text-align:right;line-height:80px;font-size:18px;font-family:Verdana, Geneva, sans-serif;color:#666;outline:none; text-transform:uppercase; position: fixed;bottom: 350px;left: 0;border: 5px solid rgb(235, 235, 235);}
  #btn-list{width:100%;overflow:hidden;position: fixed;bottom: 50px;left: 0;}
  #btn-list .btn-radius{border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;border:1px solid #e5e5e5;background:-webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7), to(#ebebeb));background:-moz-linear-gradient(top, #f7f7f7,#ebebeb);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#f7f7f7,endColorstr=#ebebeb,grandientType=1);line-height:60px;text-align:center;text-shadow:0px 1px 1px #FFF;font-weight:bold;font-family:Verdana, Geneva, sans-serif;color:#666;float:left;font-size:14px;cursor:pointer;}
  #btn-list .btn-radius:active{background:#ffffff;}

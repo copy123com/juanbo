@@ -1,8 +1,9 @@
 <template>
   <div class="listBox">
-     <div class="tab">
-       <h3>英语作文</h3>
-     </div>
+     <header class="header">
+      <a-icon type="left" class="iLeft" @click="back" />
+        <h3 class="tab">英语作文</h3>
+    </header>
     <a-list itemLayout="horizontal" :dataSource="data" class="a-list" >
     <a-list-item slot="renderItem" slot-scope="item, index" :key="index" @click="listClick(item.id)">
       <a-list-item-meta
@@ -48,28 +49,35 @@ export default {
     listClick(res){
       this.$router.push('/listdetails')
       console.log(res)
+    },
+     back(){
+      this.$router.back();
     }
   }
 }
 
 </script>
 
-<style scoped>
-.tab{
-  width: 100%;;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  height:44px;
-  line-height:44px;
-  background-color:rgb(92, 128, 202);
-}
-.tab h3{
-  text-align: center;
-  color: #fff;
-}
-.listBox .a-list{
-  margin-top: 44px;
+<style lang="stylus" scoped>
+.header{
+  display flex
+  background-color rgb(92, 128, 202)
+  align-items center
+  height 2.346667rem
+  .tab{
+  background-color rgb(92, 128, 202)
+  text-align center
+  color #fff
+  line-height 2.346667rem
+  flex 1
+  padding-right 17px
+  
+  }
+  .iLeft{
+    color #fff
+    font-size 16px
+    margin-left .266667rem
+    
+  }
 }
 </style>

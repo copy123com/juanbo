@@ -1,6 +1,9 @@
 <template>
    <div>
-     <h3>登录</h3>
+     <header class="header">
+      <a-icon type="left" class="iLeft" @click="back" />
+        <h3 class="tab">登录</h3>
+    </header>
      <a-form
     id="components-form-demo-normal-login"
     :form="form"
@@ -71,21 +74,38 @@ beforeCreate() {
         }
       });
     },
+    back(){
+      this.$router.back();
+    }
   },
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
+.header{
+  display flex
+  background-color rgb(92, 128, 202)
+  align-items center
+  height 2.346667rem
+  .tab{
+  background-color rgb(92, 128, 202)
+  text-align center
+  color #fff
+  line-height 2.346667rem
+  flex 1
+  padding-right 17px
+  }
+  .iLeft{
+    color #fff
+    font-size 16px
+    margin-left .266667rem
+  }
+}
+
 .box .login-form{
   padding: 15px;
 }
-h3{
-  text-align: center;
-  height:2.346667rem;
-  line-height:2.346667rem;
-  color: #fff;
-  background-color: rgb(92, 128, 202);
-}
+
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
 }

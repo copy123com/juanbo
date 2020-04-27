@@ -1,5 +1,6 @@
 <template>
  <div>
+    <nav-g class="zIndex"></nav-g>
     <div class="tab">
       <h3>我的问答</h3>
     </div>
@@ -10,6 +11,7 @@
 
 <script>
 import Comment from './Children/Comment'
+import navG from '@/components/front/navG'
 export default {
   data() {
     return {
@@ -38,7 +40,8 @@ export default {
      
   },
   components:{
-    Comment
+    Comment,
+    navG
   }
 }
 </script>
@@ -60,5 +63,8 @@ export default {
 }
 .answerComment{
   margin-top: 44px;
+}
+.zIndex{
+  z-index: 999;
 }
 </style>

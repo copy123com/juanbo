@@ -1,6 +1,10 @@
 <template>
+<div>
+ <header class="header">
+   <a-icon type="left" class="iLeft" @click="back" />
+    <h3 class="tab">我要提问</h3>
+ </header>
    <a-form-model :model="form">
-   <h3 class="tab">我要提问</h3>
    <a-form-model-item>
       <a-input v-model="form.desc" type="textarea" placeholder="发表问题..." />
     </a-form-model-item>
@@ -25,6 +29,7 @@
     </a-button>
     </a-form-model-item>
   </a-form-model>
+</div>
 </template>
 
 <script>
@@ -72,10 +77,10 @@ data() {
           _this.form.fileList.push(item.response.url)
           
           })
-      }
-     
-      
-      
+      }  
+    },
+    back(){
+      this.$router.back();
     }
   },
  
@@ -83,17 +88,29 @@ data() {
 </script>
 
 <style lang="stylus" scoped>
-.box{
+.header{
+  display flex
+  background-color rgb(92, 128, 202)
+  align-items center
+  height 2.346667rem
+  .tab{
+  background-color rgb(92, 128, 202)
+  text-align center
+  color #fff
+  line-height 2.346667rem
+  flex 1
+  padding-right 17px
+  }
+  .iLeft{
+    color #fff
+    font-size 16px
+    margin-left .266667rem
+  }
+}
+
+.ant-form{
   width 100%
   height 100%
-  
-.tab{
-height 2.4rem
-background-color rgb(92, 128, 202)
-text-align center
-line-height 2.4rem
-color #fff
-}
 .ant-input{
   margin 0
   padding 0
@@ -104,9 +121,9 @@ color #fff
 }
 .ant-upload-picture-card-wrapper{
   position absolute
-  bottom 3rem
+  bottom 0
   right 0
-  text-align center
+  
 }
 .button{
  position absolute

@@ -1,6 +1,7 @@
 <!-- 我 -->
 <template>
    <div>
+      <nav-g></nav-g>
       <header class="h-box">
          <img src="./../../assets/logo.png" alt="">
          <a href="/login">
@@ -70,13 +71,16 @@
 </template>
 
 <script>
+import navG from '@/components/front/navG'
 export default {
     data () {
        return {
        };
     },
 
-    components: {},
+    components: {
+       navG
+    },
 
     methods: {}
 }

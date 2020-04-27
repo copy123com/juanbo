@@ -1,6 +1,7 @@
 <!-- 首页 -->
 <template>
    <div class="homeBox">
+      <nav-g></nav-g>
       <ul>
          <li>
             <router-link to="/list" class="divs">
@@ -37,16 +38,16 @@
 </template>
 
 <script>
-
+import navG from '@/components/front/navG'
 export default {
     data () {
        return {
-        
+          
        };
     },
 
     components: {
-      
+      navG
     },
     methods: {
        
