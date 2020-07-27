@@ -13,7 +13,7 @@
       <a-form-item>
         <a-input
           v-decorator="[
-          'userName',
+          'username',
           { rules: [{ required: true, message: 'Please input your username!' }] },
         ]"
           placeholder="用户名"
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { server } from '@/api/index'
+import { Message } from 'ant-design-vue'
 export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'normal_login' })
@@ -61,14 +63,32 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          server.getLogin(values).then((res) => {
+            if (res.code === 200) {
+              Message.loading('正在登陆...', 1).then(() => {
+                if (!window.localStorage) {
+                  Message.error('浏览器不支持localstorage')
+                  return false
+                } else {
+                  Message.success('登陆成功！')
+                  let token = res.data.token
+                  let nickName = res.data.nickname
+                  let headImg = res.data.headimgurl
+                  localStorage.setItem('token', token)
+                  localStorage.setItem('nickName', nickName)
+                  localStorage.setItem('headImg', headImg)
+                  this.$router.push({path:'/me'})
+                }
+              })
+            }
+          })
         }
       })
     },
     back() {
       this.$router.back()
-    }
-  }
+    },
+  },
 }
 </script>
 

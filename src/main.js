@@ -15,7 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import MintUi from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
-import { Tabs,Comment,List,Tooltip,Icon,Avatar,Menu,Layout,Upload,Modal,Form,FormModel,Input,Button,Message,Row,Col,Checkbox,} from 'ant-design-vue';
+import { Tabs, Comment, List, Tooltip, Icon, Avatar, Menu, Layout, Upload, Modal, Form, FormModel, Input, Button, Message, Row, Col, Checkbox, } from 'ant-design-vue';
 
 //导入axios
 import axios from 'axios'

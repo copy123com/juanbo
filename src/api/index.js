@@ -11,6 +11,7 @@ axios.interceptors.request.use(
         config.data
         config.headers = {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                // 'Content-Type': 'multipart/form-data'
         }
         return config;
     },
@@ -160,6 +161,14 @@ const BASE_URL = 'https://test.zhihao1.cn/api'
 export const server = {
     getEmailCode: (paramObj) => { //注册时获取邮箱验证码
         return post(BASE_URL + '/user/get_email', qs.stringify(paramObj));
+        // return post(BASE_URL + '/user/get_email', paramObj);
     },
 
+    getRegister: (paramObj) => { //注册
+        return post(BASE_URL + '/user/register', qs.stringify(paramObj));
+    },
+
+    getLogin: (paramObj) => { //注册
+        return post(BASE_URL + '/user/login', qs.stringify(paramObj));
+    },
 }
