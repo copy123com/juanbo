@@ -80,6 +80,8 @@ export default {
                   this.$router.push({path:'/me'})
                 }
               })
+            }else if(res.code === 400){
+              Message.error('邮箱不存在或密码错误')
             }
           })
         }

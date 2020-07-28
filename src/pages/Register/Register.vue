@@ -193,7 +193,8 @@ export default {
       }
     },
 
-    async register() {//注册
+    async register() {
+      //注册
       await this.$refs.ruleForm.validate((v) => {
         if (v) {
           server
@@ -205,11 +206,16 @@ export default {
               password: this.form.password,
             })
             .then((res) => {
+              console.log(res)
               if (res.code === 200) {
                 Message.loading('注册中...', 1).then(() => {
                   Message.success('注册成功！')
                   this.$router.push('/login')
                 })
+              } else if (res.code === 410) {
+                Message.error('验证码无效，请重新获取验证码！')
+              }else if (res.code === 405) {
+                Message.error('该邮箱已经注册，请更换邮箱！')
               } else {
                 Message.error('注册失败，请联系管理员！')
               }
