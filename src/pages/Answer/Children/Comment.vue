@@ -3,7 +3,7 @@
      <a-comment>
       <template slot="actions">
         <span key="comment-basic-like">
-          <a-tooltip title="Like">
+          <a-tooltip title="+1">
             <a-icon type="like" :theme="action === 'liked' ? 'filled' : 'outlined'" @click="like" />
           </a-tooltip>
           <span style="padding-left: '8px';cursor: 'auto'">
@@ -11,7 +11,7 @@
           </span>
         </span>
         <span key="comment-basic-dislike">
-          <a-tooltip title="Dislike">
+          <a-tooltip title="-1">
             <a-icon
               type="dislike"
               :theme="action === 'disliked' ? 'filled' : 'outlined'"
@@ -39,15 +39,20 @@
         <span>{{ moment().startOf('hour').fromNow() }}</span>
       </a-tooltip>
     </a-comment>
-    <Reply></Reply>
+    <div class="Box">
+       <Reply :num=num></Reply>
+    </div>
     <CommentTextarea class="textareaBox" :type="ctype" :name="name" :cisShow="isShow" @submit="csubmit" @canel="ccanel"></CommentTextarea>
    </div>
+   
 </template>
 
 <script>
 import moment from 'moment'
 import Reply from './Reply'
 import CommentTextarea from './CommentTextarea'
+import axios from 'axios'
+import store from '../../../store/index'
 export default {
   data() {
     return {
@@ -57,8 +62,12 @@ export default {
       moment,
       name:'Han Solo',
       isShow:false,
-      ctype:false
+      ctype:false,
+      num:3
     };
+  },
+  created:function() {
+    this.getData()
   },
   methods: {
     //回答的好likes加1
@@ -82,11 +91,17 @@ export default {
     //子组件点击提交返回来的数据
     csubmit(res,rep){
       this.isShow = rep;
-      console.log('回来'+rep)
+      console.log(res)
     },
      //子组件点击取消返回来的数据
     ccanel(rep){
       this.isShow = rep
+    },
+    
+    //向后台获取数据
+    async getData(){
+      let s= await axios.get('/content/getall');
+      console.log(s)
     }
   },
   components:{
@@ -96,7 +111,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.Box{
+  padding: 0 15px;
+}
 .textareaBox{
   margin-bottom: 50px;
 }

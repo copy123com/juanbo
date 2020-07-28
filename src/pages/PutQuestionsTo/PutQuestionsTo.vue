@@ -5,14 +5,17 @@
     <h3 class="tab">我要提问</h3>
  </header>
    <a-form-model :model="form">
+     <a-form-model-item>
+      <a-input v-model="form.title" class="title" type="text" placeholder="请输入标题" />
+    </a-form-model-item>
    <a-form-model-item>
-      <a-input v-model="form.desc" type="textarea" placeholder="发表问题..." />
+      <a-input v-model="form.content" type="textarea" placeholder="发表问题..." />
     </a-form-model-item>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
       <img alt="example" style="width: 100%" :src="previewImage" />
     </a-modal>
    <a-upload
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      :beforeUpload="beforeUpload"
       listType="picture-card"
       :fileList="fileList"
       @preview="handlePreview"
@@ -33,18 +36,16 @@
 </template>
 
 <script>
+import store from '../../store';
+import axios from 'axios'
 export default {
+  
 data() {
     return {
       form: {
-        name: '',
-        region: undefined,
-        date1: undefined,
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
-        fileList:[]
+        content:'',
+        title:'',
+        img:''
       },
       previewVisible: false,
       previewImage: '',
@@ -53,12 +54,63 @@ data() {
   },
   methods: {
     onSubmit() {
-      this.form.desc='';
-      this.fileList = [];
+        let _this = this;
+        const formData = new FormData();
+        _this.fileList.forEach((file)=>{
+          _this.form.img = file.url || file.thumbUrl;
+      });
+      if(this.form.title === ''){
+         this.$message.info('标题不能为空');
+         return;
+      }else if(this.form.content === ''){
+         this.$message.info('内容不能为空');
+          return;
+      }
+      this.form.uid = sessionStorage.getItem('uid');
+     let token = this.$store.getters.getToken;
+    //  axios.defaults.headers.common['Authorization'] = token;
+    //  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencode;charset=UTF-8';
+     let forms = _this.form;
+     
+    //  axios.post("/content/add",{forms}).then(res=>{
+    //    console.log(res)
+    //  })
+   const request = axios.create({
+     baseURL:'https://test.zhihao1.cn/api',
+     withCredentials:false
+   })
+   request.interceptors.request.use(function (config) {
+     config.headers = {
+       'Authorization':token,
+       'Content-Type':'multipart/form-data'
+     }
+     return config;
+   },function(error){
+     return Promise.reject(error)
+   })
+    
+    request({
+      url:"/content/add",
+      method:'post'
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+
+
       this.$message.info('发表成功');
       this.$router.push('/home');
+      //获取登录时保存的用户id
+     
       console.log('submit!', this.form);
-    },handleCancel() {
+
+     
+      this.uploading = true;
+    },
+
+
+    handleCancel() {
       this.previewVisible = false;
     },
     async handlePreview(file) {
@@ -68,16 +120,14 @@ data() {
       this.previewImage = file.url || file.preview;
       this.previewVisible = true;
     },
+    
     handleChange({ fileList }) {
-      var _this = this;
       this.fileList = fileList;
-      console.log(fileList)
-      if(fileList[0].response.name){
-        fileList.map(item=>{              
-          _this.form.fileList.push(item.response.url)
-          
-          })
-      }  
+    },
+
+    beforeUpload(file){
+      this.fileList = [...this.fileList, file];
+      return false;
     },
     back(){
       this.$router.back();
@@ -118,6 +168,7 @@ data() {
   height 250px
   border none
   outline none
+  border 1px solid #ccc
 }
 .ant-upload-picture-card-wrapper{
   position absolute
@@ -131,7 +182,10 @@ data() {
  right 0
  background-color none
 }
-
+.title{
+  height 2.833333rem
+  margin-top .533333rem
+}
 }
 </style>>
 

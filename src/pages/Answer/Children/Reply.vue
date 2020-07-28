@@ -1,34 +1,61 @@
 <template>
-  <a-list
-    class="comment-list"
-    :header="`${data.length} replies`"
-    itemLayout="horizontal"
-    :dataSource="data"
-    extra="horizontal"
-    type="flex"
-    justify="end"
-  >
-    <a-list-item slot="renderItem" slot-scope="item">
-      <a-comment :author="item.author" :avatar="item.avatar">
-        <template slot="actions">
-          <span v-for="(action,index) in item.actions" :key="index" @click="change">{{ action }}</span>
-        </template>
-        <p slot="content">{{ item.content }}</p>
-        <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
-          <span>{{ item.datetime.fromNow() }}</span>
-        </a-tooltip>
-      </a-comment>
-    </a-list-item>
-  </a-list>
+  <div class="bigBox">
+    <div>
+      <a-list
+        class="comment-list"
+        :header="`共 ${data.length} 条回复`"
+        itemLayout="horizontal"
+        :dataSource="data.slice(0,2)"
+        extra="horizontal"
+        type="flex"
+        justify="end"
+        v-if="isshow"
+      >
+        <a-list-item slot="renderItem" slot-scope="item">
+          <a-comment :author="item.author" :avatar="item.avatar">
+            <p slot="content">{{ item.content }}</p>
+            <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+              <span>{{ item.datetime.fromNow() }}</span>
+            </a-tooltip>
+          </a-comment>
+        </a-list-item>
+      </a-list>
+       <a-list
+        class="comment-list"
+        :header="`共 ${data.length} 条回复`"
+        itemLayout="horizontal"
+        :dataSource="data"
+        extra="horizontal"
+        type="flex"
+        justify="end"
+        v-else
+      >
+        <a-list-item slot="renderItem" slot-scope="item">
+          <a-comment :author="item.author" :avatar="item.avatar">
+            <p slot="content">{{ item.content }}</p>
+            <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+              <span>{{ item.datetime.fromNow() }}</span>
+            </a-tooltip>
+          </a-comment>
+        </a-list-item>
+      </a-list>
+    </div>
+    <div class="more"  @click="more">{{isshow?'查看更多':'收起'}}</div>
+  </div>
+
 </template>
 <script>
 import moment from 'moment'
 export default {
+  props:{
+    num:{
+      type:Number
+    }
+  },
   data() {
     return {
       data: [
         {
-          actions: ['回复'],
           author: 'Han Solo',
           avatar:
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -37,7 +64,6 @@ export default {
           datetime: moment().subtract(1, 'days')
         },
         {
-          actions: ['Reply to'],
           author: 'Han Solo',
           avatar:
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -46,7 +72,6 @@ export default {
           datetime: moment().subtract(2, 'days')
         },
         {
-          actions: ['Reply to'],
           author: 'Han Solo',
           avatar:
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -55,7 +80,6 @@ export default {
           datetime: moment().subtract(2, 'days')
         },
         {
-          actions: ['Reply to'],
           author: 'Han Solo',
           avatar:
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -64,14 +88,27 @@ export default {
           datetime: moment().subtract(2, 'days')
         }
       ],
-      moment
+      moment,
+      isshow:true
     }
+    
   },
   methods: {
-    //点击回复按钮
-    change() {
-      console.log('1')
+    more(){
+      this.isshow=!this.isshow
     }
   }
 }
 </script>
+<style lang="stylus" scoped>
+  
+
+  .more
+    width 100px
+    line-height 30px
+    margin 0 auto
+    text-align center
+    border-radius 15px
+    border 1px solid #ccc
+    margin-bottom 50px
+</style>

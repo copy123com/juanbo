@@ -17,6 +17,7 @@
           { rules: [{ required: true, message: 'Please input your username!' }] },
         ]"
         placeholder="用户名"
+       
       >
         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
       </a-input>
@@ -29,6 +30,7 @@
         ]"
         type="password"
         placeholder="密码"
+        
       >
         <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
       </a-input>
@@ -61,22 +63,49 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+  data(){
+    return{
+    
+    }
+  },
 beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'normal_login' });
   },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
+      this.form.validateFields(async(err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          let res =await axios.post('/user/login',{username:values.userName,password:values.password})
+
+          let {data} = res;
+          
+          if(data.msg === '账号或密码错误'){
+            this.$message.error({
+              content: '账号或密码错误'
+            });
+            return;
+          }
+          //保存id到sessionStorage中
+          sessionStorage.setItem('uid',data.data.id);
+          this.$store.commit('setToken',data.data.token);
+          console.log( this.$store.getters.getToken);
+          this.$message.success('登录成功');
+          this.$router.push('/home');
+            
+          console.log('Received values of form: ', values.userName,values.password,res);
         }
       });
     },
+
+    //返回上一页
     back(){
       this.$router.back();
-    }
+    },
+
   },
 }
 </script>

@@ -15,7 +15,7 @@
              
          </li>
          <li class="biglogo">
-            <router-link to="/putquestionsto" class="routers">
+            <router-link to="/putquestionsto" @click="to" class="routers">
                <p>
                   <img src="../../assets/img/photograph.jpg" alt="">
                </p>
@@ -50,7 +50,9 @@ export default {
       navG
     },
     methods: {
-       
+       to(){
+          console.log('1')
+       }
     },
    
 }
