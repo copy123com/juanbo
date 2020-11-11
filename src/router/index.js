@@ -23,6 +23,7 @@ import Member from '@/pages/Admin/Children/Member'
 Vue.use(Router)
 
  const router = new Router({
+    
     routes: [{
         path: '/',
         redirect: '/home'
@@ -79,11 +80,11 @@ Vue.use(Router)
         name:'login',
         component:Login
     }],
-    mode:'history'
+    
 })
 router.beforeEach((to,from,next)=>{
     if(to.path === '/putquestionsto'){
-        let token = store.getters.getToken;
+        let token = localStorage.getItem('token');
         if(!token){
             router.app.$message.error('请先登录');
             return;

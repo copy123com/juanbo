@@ -53,12 +53,14 @@ data() {
     };
   },
   methods: {
+    //提交问题
     onSubmit() {
         let _this = this;
-        const formData = new FormData();
         _this.fileList.forEach((file)=>{
-          _this.form.img = file.url || file.thumbUrl;
+          //获取图片数据
+          _this.form.img = file.originFileObj;
       });
+      //对提交的信息进行判断
       if(this.form.title === ''){
          this.$message.info('标题不能为空');
          return;
@@ -66,46 +68,45 @@ data() {
          this.$message.info('内容不能为空');
           return;
       }
-      this.form.uid = sessionStorage.getItem('uid');
-     let token = this.$store.getters.getToken;
-    //  axios.defaults.headers.common['Authorization'] = token;
-    //  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencode;charset=UTF-8';
+      this.form.uid = localStorage.getItem('uid');
+     let token = localStorage.getItem('token');
+   
      let forms = _this.form;
-     
-    //  axios.post("/content/add",{forms}).then(res=>{
-    //    console.log(res)
-    //  })
+     const formData = new FormData();
+   formData.append('img',forms.img);
+   formData.append('content',forms.content);
+   formData.append('title',forms.title);
+   formData.append('img',forms.img);
+   formData.append('uid',forms.uid);
    const request = axios.create({
-     baseURL:'https://test.zhihao1.cn/api',
-     withCredentials:false
+     baseURL:'https://test.zhihao1.cn/api'
    })
    request.interceptors.request.use(function (config) {
      config.headers = {
-       'Authorization':token,
-       'Content-Type':'multipart/form-data'
+       'token':token,
+       'Content-Type': 'multipart/form-data',
      }
      return config;
    },function(error){
      return Promise.reject(error)
    })
-    
-    request({
+   this.$message.loading('正在提交',2).then(()=>{
+      request({
       url:"/content/add",
-      method:'post'
+      method:'post',
+      data:formData
     }).then(res=>{
-      console.log(res)
+      console.log('2')
+      if(res.status == 200){
+        this.$message.success('提交成功');
+        this.$router.push('/home');
+        console.log(res)
+      }
     }).catch(err=>{
       console.log(err)
     })
-
-
-      this.$message.info('发表成功');
-      this.$router.push('/home');
-      //获取登录时保存的用户id
-     
-      console.log('submit!', this.form);
-
-     
+   })
+    
       this.uploading = true;
     },
 

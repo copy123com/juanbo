@@ -4,7 +4,10 @@
     <div class="tab">
       <h3>我的问答</h3>
     </div>
-    <Comment class="answerComment"></Comment>
+    <div v-for="(item,index) in listData" :key="index">
+      <Comment class="answerComment" :list="item"></Comment>
+    </div>
+    
     
  </div>
 </template>
@@ -12,32 +15,24 @@
 <script>
 import Comment from './Children/Comment'
 import navG from '@/components/front/navG'
+import axios from 'axios'
 export default {
   data() {
     return {
-      datas: [
-        {
-          actions: ['Reply to'],
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          
-        },
-        {
-          actions: ['Reply to'],
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          
-        },
-      ],
-      isShow:true
+      isShow:true,
+      listData:{}
     };
   },
-    methods: {
-     
+  created(){
+    this.getData()
+  },
+  methods: {
+    async getData(){
+    let datas= await axios.get('https://test.zhihao1.cn/api/content/getall');
+    let Data = datas.data.data;
+    this.listData = Data.reverse();
+   console.dir(this.listData)
+  }
   },
   components:{
     Comment,
