@@ -23,7 +23,7 @@
     >
       <div v-if="fileList.length < 8" >
         <a-icon type="plus" />
-        <div class="ant-upload-text">Upload</div>
+        <div class="ant-upload-text">上传图片</div>
       </div>
     </a-upload>
     <a-form-model-item class="button">
@@ -96,12 +96,13 @@ data() {
       method:'post',
       data:formData
     }).then(res=>{
-      console.log('2')
-      if(res.status == 200){
+      if(res.data.code == 200){
         this.$message.success('提交成功');
         this.$router.push('/home');
-        console.log(res)
+        return;
       }
+      this.$message.error('提交失败,请重新提交');
+      this.$router.push('/home');
     }).catch(err=>{
       console.log(err)
     })

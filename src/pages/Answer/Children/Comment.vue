@@ -89,7 +89,10 @@ export default {
       axios.get(`https://test.zhihao1.cn/api/reply/getfind?pid=${this.list.id}`).then((res,req)=>{
         
         this.isComment = res.data.code;
-        let PidData = res.data.data;
+        //把获取的数组排序
+        let PidData = res.data.data.sort();
+        console.log(PidData);
+        //把数组反转，让新添加的数据显示在最上面
         this.chilList = PidData.reverse();
         console.log(this.chilList);
       })
@@ -121,7 +124,8 @@ export default {
       data.imgurl1 =  res.get('img');
       data.nickname = localStorage.getItem('nickName');
       console.log(data.nickname);
-     this.chilList.unshift(data)
+      this.chilList.push(data);
+      this.getList();
     },
      //子组件点击取消返回来的数据
     ccanel(rep){

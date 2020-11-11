@@ -652,7 +652,7 @@
                 p-id="6465"
               />
             </svg>
-            <span>设置</span>
+            <span>退出登录</span>
           </a>
         </li>
         <li class="nav-item">

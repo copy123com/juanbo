@@ -66,14 +66,16 @@ export default {
       axios.post('https://test.zhihao1.cn/api/reply/add',formList).then((res,req)=>{
         console.log(res);
       if(res.status == 200){
-        this.$message.success('提交成功',1)
+        this.$message.success('提交成功',1);
+         //把数据返回给父组件
+        this.$emit('submit',formList,!this.cisShow);
       }else{
           this.$message.error('提交失败')
       }
       
     });
-     //把数据返回给父组件
-      this.$emit('submit',formList,!this.cisShow);
+    
+      //清空内容
       this.commentText = "";
     },
     //是否显示评论盒子

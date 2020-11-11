@@ -45,7 +45,7 @@
         >记住密码</a-checkbox>
         <a class="login-form-forgot" href>忘记密码</a>
         <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>或
-        <a href="/register">立即注册</a>
+        <router-link to="/register">立即注册</router-link>
       </a-form-item>
     </a-form>
   </div>

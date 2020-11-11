@@ -23,7 +23,6 @@ import Member from '@/pages/Admin/Children/Member'
 Vue.use(Router)
 
  const router = new Router({
-    
     routes: [{
         path: '/',
         redirect: '/home'
